@@ -1,0 +1,9 @@
+set title "P-polariseret lys"
+set xlabel "Vinkel (grader)"
+set ylabel "Relativ intensitet"
+set xrange[8:90]
+set yrange[0:0.5]
+set key top right 
+set grid
+plot filename title "Reflekteret P-polariseret" with lines
+pause -1
