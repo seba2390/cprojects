@@ -1,6 +1,7 @@
-CFLAGS = -Wall -Werror -O1
-CFLAGS += $(shell gsl-config --cflags)
-LDLIBS += $(shell gsl-config --libs)
+CFLAGS = -Wall -O1 -std=gnu11
+CFLAGS += -pthread
+CFLAGS += -fopenmp
+LDLIBS = -lm -lgomp
 CC = gcc
 
 .PHONEY:default
@@ -9,7 +10,7 @@ default: out.txt out.png
 
 out.png: out.txt Makefile
 	echo '\
-	set terminal png size 1280,800;\
+	set terminal png size 3800,2160;\
 	set output "$@";\
 	set size 1,1 ;\
 	set key top right;\
@@ -23,7 +24,7 @@ out.png: out.txt Makefile
 	set xrange [-0.1:4.1];\
 	set yrange [-0.1:1.1];\
 	plot \
-	 "$<" using 1:2 with points pointtype 7 pointsize 0.01 title "Popsize at equilibrium"\
+	 "$<" using 1:2 with points pointtype 7 pointsize 0.01 lc rgb "blue" title "Popsize at equilibrium"\
 	' | gnuplot
 
 out.txt: main
@@ -41,7 +42,7 @@ clean:
 
 .PHONEY:show 
 show:
-	eog out.png
+	cmd.exe /C start out.png
 
 .PHONEY:test
 test:
