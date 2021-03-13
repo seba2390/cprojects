@@ -10,11 +10,11 @@ double population_func(double x_n, double r)
 
 int main()
 {
-	double init_pop_size = 0.300;
+	double init_pop_size = 0.9;
 	int nr_of_threads = 3;
 	double max_growth_rate = 4.0;
 
-	int nr_steps = (int)1e6;
+	int nr_steps = (int)1e5;
 	double step_size = max_growth_rate/((double)(nr_of_threads*nr_steps));
 	#pragma omp parallel sections
 	{
